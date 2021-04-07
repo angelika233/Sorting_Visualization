@@ -1,10 +1,12 @@
 from tkinter import *
 from tkinter import ttk
+from BubbleSort import Bubble_sort
 import random
 
 
 # Generating random numbers
 def Generate_number():
+    global data
     try:
         min = int(minEntry.get())
     except:
@@ -29,11 +31,11 @@ def Generate_number():
     for i in range(0, size):
         data.append(random.randrange(min, max + 1))
 
-    Draw(data)
+    Draw(data, ['black' for x in range(len(data))])
 
 
 # Drawing dataset on canvas
-def Draw(data):
+def Draw(data, border):
     canvas.delete("all")
     canv_h = 360
     canv_w = 570
@@ -47,8 +49,15 @@ def Draw(data):
         x1 = (i + 1) * width + offset
         y1 = canv_h
 
-        canvas.create_rectangle(x0, y0, x1, y1, fill='#5b34eb')
+        canvas.create_rectangle(x0, y0, x1, y1, fill='#5b34eb', outline = border[i], width =2)
         canvas.create_text(x0 + 2, y0, anchor=SW, text=str(data[i]))
+    root.update_idletasks()
+
+
+def Sort():
+    global data
+    if selected_algorithm.get() == 'Bubble':
+        Bubble_sort(data, Draw)
 
 
 # Creating window
@@ -59,7 +68,7 @@ root.title('Sorting Algorithms Visualization')
 
 # Variables
 selected_algorithm = StringVar()
-
+data = []
 # Frame and labels
 
 frame = Frame(root, width=570, height=110, bg='gray')
@@ -92,7 +101,9 @@ maxEntry = Entry(frame)
 maxEntry.grid(row=1, column=3, padx=5, pady=5, sticky=W)
 
 button = Button(frame, text="Start Generating", command=Generate_number, bg='#5d4c9e')
-button.grid(row=1, column=4, padx=55, pady=5)
+button.grid(row=0, column=4, padx=55, pady=5)
 
+button_1 = Button(frame, text="Start Sorting", command=Sort, bg='#5d4c9e')
+button_1.grid(row=1, column=4, padx=55, pady=5)
 
 root.mainloop()
