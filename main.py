@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from BubbleSort import Bubble_sort
+from MergeSort import Merge_Sort
 import random
 
 
@@ -24,8 +25,8 @@ def Generate_number():
         min = 0
     if max < min or max > 100:
         max = 20
-    if size < 3 or size > 30:
-        size = 10
+    if size < 3 or size > 60:
+        size = 15
 
     data = []
     for i in range(0, size):
@@ -41,7 +42,7 @@ def Draw(data, border):
     canv_w = 570
     width = canv_w / (len(data) + 1)
     spacing = 5
-    offset = 30
+    offset = 5
     normalized = [i / max(data) for i in data]
     for i, height in enumerate(normalized):
         x0 = i * width + offset + spacing
@@ -59,6 +60,8 @@ def Sort():
     if selected_algorithm.get() == 'Bubble':
         Bubble_sort(data, Draw)
 
+    elif selected_algorithm.get() == 'Merge':
+        Merge_Sort(data,Draw)
 
 # Creating window
 root = Tk()
