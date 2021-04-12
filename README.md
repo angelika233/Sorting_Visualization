@@ -4,7 +4,7 @@
 
 ## How it works?
 
-After running a project you window opens and you can choose sorting settings (*default*):
+After running a project window opens and you can choose sorting settings (*default*):
 * alghoritm (*Bubble Sort*)
 * miniumum and maximum value (*0, 20*)
 * size of the array (*10*)
